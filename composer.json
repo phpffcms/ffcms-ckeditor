@@ -1,0 +1,21 @@
+{
+  "name": "phpffcms/ffcms-ckeditor",
+  "description": "Ckeditor build for FFCMS 3 package",
+  "type": "library",
+  "keywords": ["wysiwyg", "php", "html", "css"],
+  "homepage": "http://ffcms.org",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Pyatinskyi M.M.",
+      "email": "zenn1989@gmail.com",
+      "homepage": "http://ffcms.ru"
+    }
+  ],
+  "require": {
+    "php": ">=5.4"
+  },
+  "autoload": {
+    "psr-0": { "Ffcms\\": "src/" }
+  }
+}
