@@ -33,14 +33,14 @@ CKEDITOR.editorConfig = function( config ) {
     // Se the most common block elements.
     config.format_tags = 'p;h1;h2;h3;pre';
 
-    config.filebrowserBrowseUrl = '/api.php?iface=back&object=ckbrowser&type=0';
-    config.filebrowserUploadUrl = '/api.php?iface=back&object=ckloader&type=0';
+    config.filebrowserBrowseUrl = script_url+'/api/ckbrowser/browse/files?lang='+script_lang;
+    config.filebrowserUploadUrl = script_url+'/api/ckbrowser/upload/files?lang='+script_lang;
 
-    config.filebrowserImageBrowseUrl = '/api.php?iface=back&object=ckbrowser&type=1';
-    config.filebrowserImageUploadUrl = '/api.php?iface=back&object=ckloader&type=1';
+    config.filebrowserImageBrowseUrl = script_url+'/api/ckbrowser/browse/images?lang='+script_lang;
+    config.filebrowserImageUploadUrl = script_url+'/api/ckbrowser/upload/images?lang='+script_lang;
 
-    config.filebrowserFlashBrowseUrl = '/api.php?iface=back&object=ckbrowser&type=2';
-    config.filebrowserFlashUploadUrl = '/api.php?iface=back&object=ckloader&type=2';
+    config.filebrowserFlashBrowseUrl = script_url+'/api/ckbrowser/browse/flash?lang='+script_lang;
+    config.filebrowserFlashUploadUrl = script_url+'/api/ckbrowser/upload/flash?lang='+script_lang;
 
     // Make dialogs simpler.
     config.removeDialogTabs = 'image:advanced;link:advanced';
@@ -49,7 +49,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.disableNativeSpellChecker = false;
 
     //config.extraPlugins = 'videodetector,widget,lineutils,codesnippet,leaflet,wordcount';
-    config.extraPlugins = 'notification,wordcount,widget,lineutils,codesnippet,leaflet,fakeobjects,pagebreak';
+    config.extraPlugins = 'notification,wordcount,widget,lineutils,codesnippet,leaflet,fakeobjects,pagebreak,oembed';
 
     config.wordcount = {
         showWordCount: true,
@@ -58,10 +58,8 @@ CKEDITOR.editorConfig = function( config ) {
     };
 
     config.forcePasteAsPlainText = true;
-
     config.height = '320';
-
     config.startupFocus = false;
-
     config.basicEntities = false;
+    config.startupOutlineBlocks = true;
 };
