@@ -26,10 +26,15 @@ class Editor extends ApiController
 
     /**
      * Append translation file ;)
+     * @throws NativeException
      */
     public function before()
     {
         parent::before();
+        // check if user have permission to access there
+        if (!App::$User->isAuth() || !App::$User->identity()->getRole()->can('global/file')) {
+            throw new NativeException('Permission denied');
+        }
         App::$Translate->append(__DIR__ . '/Translation/' . App::$Request->getLanguage() . '.php');
     }
 
