@@ -1,6 +1,6 @@
 <?php
 /** @var $callbackName string */
-use Ffcms\Core\Helper\String;
+use Ffcms\Core\Helper\Type\String;
 use Ffcms\Apps\Api\Ckeditor\Editor;
 
 /** @var $callbackId int */

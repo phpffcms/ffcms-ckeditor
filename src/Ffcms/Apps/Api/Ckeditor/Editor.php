@@ -5,12 +5,12 @@ namespace Ffcms\Apps\Api\Ckeditor;
 use Extend\Core\Arch\ApiController;
 use Ffcms\Core\App;
 use Ffcms\Core\Exception\NativeException;
-use Ffcms\Core\Helper\Arr;
+use Ffcms\Core\Helper\Type\Arr;
 use Ffcms\Core\Helper\Date;
-use Ffcms\Core\Helper\File;
-use Ffcms\Core\Helper\Normalize;
-use Ffcms\Core\Helper\Object;
-use Ffcms\Core\Helper\String;
+use Ffcms\Core\Helper\FileSystem\File;
+use Ffcms\Core\Helper\FileSystem\Normalize;
+use Ffcms\Core\Helper\Type\Object;
+use Ffcms\Core\Helper\Type\String;
 
 class Editor extends ApiController
 {
