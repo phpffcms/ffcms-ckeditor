@@ -9,8 +9,8 @@ use Ffcms\Core\Helper\Type\Arr;
 use Ffcms\Core\Helper\Date;
 use Ffcms\Core\Helper\FileSystem\File;
 use Ffcms\Core\Helper\FileSystem\Normalize;
-use Ffcms\Core\Helper\Type\Object;
-use Ffcms\Core\Helper\Type\String;
+use Ffcms\Core\Helper\Type\Obj;
+use Ffcms\Core\Helper\Type\Str;
 
 class Editor extends ApiController
 {
@@ -49,7 +49,7 @@ class Editor extends ApiController
         $files = null;
         $relative = null;
         // check if request type is defined
-        if ($this->allowedExt[$type] === null || !Object::isArray($this->allowedExt[$type])) {
+        if ($this->allowedExt[$type] === null || !Obj::isArray($this->allowedExt[$type])) {
             throw new NativeException('Hack attempt');
         }
         // list files in directory
@@ -57,8 +57,8 @@ class Editor extends ApiController
 
         // absolute path to relative URI
         foreach ($files as $file) {
-            $newName = String::substr($file, String::length(root)+1);
-            $relative[] = trim(String::replace(DIRECTORY_SEPARATOR, '/', $newName), '/');
+            $newName = Str::substr($file, Str::length(root)+1);
+            $relative[] = trim(Str::replace(DIRECTORY_SEPARATOR, '/', $newName), '/');
         }
 
         // generate response
@@ -91,7 +91,7 @@ class Editor extends ApiController
         // get file extension
         $fileExt = '.' . $loadFile->guessExtension();
         // check if this request type is allowed
-        if ($this->allowedExt[$type] === null || !Object::isArray($this->allowedExt[$type])) {
+        if ($this->allowedExt[$type] === null || !Obj::isArray($this->allowedExt[$type])) {
             throw new NativeException('Hack attempt');
         }
 
