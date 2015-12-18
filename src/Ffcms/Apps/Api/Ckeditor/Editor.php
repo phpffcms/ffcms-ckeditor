@@ -57,7 +57,7 @@ class Editor extends ApiController
 
         // absolute path to relative URI
         foreach ($files as $file) {
-            $newName = Str::substr($file, Str::length(root)+1);
+            $newName = Str::sub($file, Str::length(root)+1);
             $relative[] = trim(Str::replace(DIRECTORY_SEPARATOR, '/', $newName), '/');
         }
 
