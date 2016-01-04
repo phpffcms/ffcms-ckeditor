@@ -62,7 +62,7 @@ class Editor extends ApiController
         }
 
         // generate response
-        $this->response = App::$View->render('editor/browse',
+        return App::$View->render('editor/browse',
             [
                 'callbackName' => App::$Security->strip_tags(App::$Request->query->get('CKEditor')),
                 'callbackId' => (int)App::$Request->query->get('CKEditorFuncNum'),
@@ -75,7 +75,7 @@ class Editor extends ApiController
     /**
      * Upload files from ckeditor
      * @param string $type
-     * @return null
+     * @return string
      * @throws NativeException
      * @throws \Ffcms\Core\Exception\SyntaxException
      */
@@ -84,8 +84,7 @@ class Editor extends ApiController
         /** @var $loadFile \Symfony\Component\HttpFoundation\File\UploadedFile */
         $loadFile = App::$Request->files->get('upload');
         if ($loadFile === null || $loadFile->getError() !== 0) {
-            $this->response = $this->errorResponse(__('File upload failed'));
-            return null;
+            return $this->errorResponse(__('File upload failed'));
         }
 
         // get file extension
@@ -97,8 +96,7 @@ class Editor extends ApiController
 
         // check if this file extension is allowed to upload
         if (!Arr::in($fileExt, $this->allowedExt[$type])) {
-            $this->response = $this->errorResponse(__('This file type is not allowed to upload'));
-            return null;
+            return $this->errorResponse(__('This file type is not allowed to upload'));
         }
 
         $date = Date::convertToDatetime(time(), 'd-m-Y');
@@ -112,7 +110,7 @@ class Editor extends ApiController
         // generate URI of uploaded file
         $url = '/upload/' . $type . '/' . $date . '/' . $fileNewName;
 
-        $this->response = App::$View->render('editor/load_success',
+        return App::$View->render('editor/load_success',
             [
                 'callbackId' => (int)App::$Request->query->get('CKEditorFuncNum'),
                 'url' => $url
