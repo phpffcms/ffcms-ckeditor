@@ -19,9 +19,9 @@ CKEDITOR.editorConfig = function( config ) {
         '/',
         { name: 'clipboard',   groups: [ 'clipboard' ] },
         { name: 'links' },
-        { name: 'insert' },
+        { name: 'insert'},
         { name: 'others' },
-        { name: 'styles' }
+        { name: 'styles' },
     ];
 
     // Remove some buttons, provided by the standard plugins, which we don't
@@ -49,8 +49,8 @@ CKEDITOR.editorConfig = function( config ) {
     config.disableNativeSpellChecker = false;
 
     //config.extraPlugins = 'videodetector,widget,lineutils,codesnippet,leaflet,wordcount';
-    config.extraPlugins = 'notification,wordcount,widget,lineutils,codesnippet,leaflet,fakeobjects,pagebreak,oembed';
-
+    config.extraPlugins = 'notification,wordcount,widget,lineutils,codesnippet,leaflet,fakeobjects,pagebreak,oembed,widgetbootstrap';
+    
     config.wordcount = {
         showWordCount: true,
         showCharCount: true,
