@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Ffcms\Widgets\Ckeditor;
 
@@ -30,7 +30,7 @@ class Ckeditor extends AbstractWidget
             $this->targetClass = 'wysiwyg';
         }
 
-        if ($this->config === null || !Arr::in($this->config, ['config-small', 'config-full'])) {
+        if ($this->config === null || !Arr::in($this->config, ['config-small', 'config-full', 'config-medium'])) {
             $this->config = 'config-default';
         }
 
@@ -50,5 +50,5 @@ class Ckeditor extends AbstractWidget
         App::$Alias->addPlainCode('js', $init);
 		return null;
 	}
-	
+
 }

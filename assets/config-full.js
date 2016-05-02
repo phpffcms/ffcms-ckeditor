@@ -26,7 +26,7 @@ CKEDITOR.editorConfig = function( config ) {
 
     // Remove some buttons, provided by the standard plugins, which we don't
     // need to have in the Standard(s) toolbar.
-    config.removeButtons = 'Replace,Save,Print,NewPage,DocProps,Preview,document,Templates,Find,SelectAll,Language';
+    config.removeButtons = 'Replace,Save,Print,NewPage,DocProps,Preview,document,Templates,Find,SelectAll,Language,Indent,Outdent';
 
     config.allowedContent = true;
 
