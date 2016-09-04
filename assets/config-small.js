@@ -31,8 +31,7 @@ CKEDITOR.editorConfig = function( config ) {
     // are not needed in a basic editor. They are removed here.
     config.removeButtons = 'Cut,Copy,Paste,Undo,Redo,Anchor,Underline,Strike,Subscript,Superscript,Indent,Outdent';
 
-    config.plugins = 'basicstyles,clipboard,floatingspace,list,indentlist,enterkey,entities,link,toolbar,undo,wysiwygarea,blockquote,sourcearea';
-
+    config.plugins = 'basicstyles,list,indentlist,enterkey,entities,link,toolbar,wysiwygarea,blockquote,sourcearea,codesnippet,smiley';
     // Dialog windows are also simplified.
     config.removeDialogTabs = 'link:advanced';
 };

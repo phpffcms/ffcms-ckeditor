@@ -5,6 +5,7 @@ namespace Ffcms\Widgets\Ckeditor;
 use Ffcms\Core\App;
 use Ffcms\Core\Arch\Widget as AbstractWidget;
 use Ffcms\Core\Helper\Type\Arr;
+use Ffcms\Core\Helper\Type\Obj;
 
 class Ckeditor extends AbstractWidget
 {
@@ -14,6 +15,7 @@ class Ckeditor extends AbstractWidget
     public $language;
 
     public $config;
+    public $jsConfig;
 
     private $baseUrl;
 
@@ -45,9 +47,16 @@ class Ckeditor extends AbstractWidget
 	{
         App::$Alias->setCustomLibrary('js', $this->baseUrl . '/ckeditor.js');
         App::$Alias->setCustomLibrary('js', $this->baseUrl . '/adapters/jquery.js');
-        $init = "$('.{$this->targetClass}').ckeditor({language: '{$this->language}', customConfig: '{$this->config}.js'});";
+        $jsInitializeCode = "$('.{$this->targetClass}').ckeditor({";
+        $jsInitializeCode .= "language: '{$this->language}', customConfig: '{$this->config}.js', ";
+        if ($this->jsConfig !== null && Obj::isArray($this->jsConfig)) {
+            foreach ($this->jsConfig as $obj => $value) {
+                $jsInitializeCode .= $obj . ": '" . $value . "', ";
+            }
+        }
+	    $jsInitializeCode .= "});";
 
-        App::$Alias->addPlainCode('js', $init);
+        App::$Alias->addPlainCode('js', $jsInitializeCode);
 		return null;
 	}
 
