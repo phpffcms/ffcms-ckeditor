@@ -1,14 +1,7 @@
-/**
- * @license Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md or http://ckeditor.com/license
- */
-
 CKEDITOR.editorConfig = function( config ) {
     // Define changes to default configuration here.
     // For complete reference see:
     // http://docs.ckeditor.com/#!/api/CKEDITOR.config
-
-    config.skin = 'office2013';
 
     // The toolbar groups arrangement, optimized for a single toolbar row.
     config.toolbarGroups = [
@@ -32,6 +25,22 @@ CKEDITOR.editorConfig = function( config ) {
     config.removeButtons = 'Cut,Copy,Paste,Undo,Redo,Anchor,Underline,Strike,Subscript,Superscript,Indent,Outdent';
 
     config.plugins = 'basicstyles,list,indentlist,enterkey,entities,link,toolbar,wysiwygarea,blockquote,sourcearea,codesnippet,smiley';
-    // Dialog windows are also simplified.
-    config.removeDialogTabs = 'link:advanced';
+    // Make dialogs simpler.
+    config.removeDialogTabs = 'image:advanced;link:advanced';
+
+    config.scayt_autoStartup = false;
+    config.disableNativeSpellChecker = false;
+
+    config.extraPlugins = 'wordcount';
+
+    config.wordcount = {
+        showWordCount: true,
+        showCharCount: true,
+        showParagraphs: false
+    };
+
+    config.forcePasteAsPlainText = true;
+    config.startupFocus = false;
+    config.basicEntities = false;
+    config.startupOutlineBlocks = true;
 };
