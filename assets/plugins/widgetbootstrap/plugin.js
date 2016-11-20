@@ -1,24 +1,16 @@
 // Init default alert classes
 
 CKEDITOR.config.widgetbootstrapAlert_alertTypes = {
-    'alert': 'Alert',
-    'info': 'Info',
-    'warning': 'Warning',
-    'success': 'Success'
+    'alert-danger': 'Error',
+    'alert-info': 'Info',
+    'alert-warning': 'Warning',
+    'alert-success': 'Success'
 };
-
 
 CKEDITOR.plugins.add( 'widgetbootstrap', {
     requires: 'widget',
 
     icons: 'widgetbootstrapLeftCol,widgetbootstrapRightCol,widgetbootstrapTwoCol,widgetbootstrapThreeCol,widgetbootstrapAlert',
-
-    /*defaults : {
-        name: 'accordion',
-        count: 3,
-        activePanel: 1,
-        multiExpand: false
-    },*/
 
     init: function( editor ) {
         
@@ -169,11 +161,11 @@ CKEDITOR.plugins.add( 'widgetbootstrap', {
             button: showButtons ? 'Add alert box' : undefined,
             dialog: 'widgetbootstrapAlert',
 
-            template: '<div class="alert-box"><div class="alert-text">Some Text</span></div>',
-
+            template: '<div class="alert">Enter alert message</div>',
+            
             editables: {
                 alertBox: {
-                    selector: '.alert-text',
+                    selector: '.alert',
                     allowedContent: allowedWidget
                 },
             },
@@ -210,16 +202,6 @@ CKEDITOR.plugins.add( 'widgetbootstrap', {
 
                 // Acceptable alert types
                 var alertTypes = CKEDITOR.config.widgetbootstrapAlert_alertTypes;
-                // Check alert types
-                for(var i = 0; i < el.classes.length; i++) {
-                    if(el.classes[i] != 'alert-box') {
-                        for ( alertName in alertTypes ) {
-                            if(el.classes[i] == alertName) {
-                                data.type = alertName;
-                            }
-                        }
-                    }
-                }
 
                 // Use textarea to decode HTML entities (#11926).
                 //textarea.setHtml( alertText.getHtml() );
@@ -235,79 +217,6 @@ CKEDITOR.plugins.add( 'widgetbootstrap', {
         } );
         // Alert dialog
         CKEDITOR.dialog.add( 'widgetbootstrapAlert', this.path + 'dialogs/widgetbootstrapAlert.js' );
-
-        /*CKEDITOR.dialog.add( 'widgetbootstrapAccordion', this.path + 'dialogs/widgetbootstrapAccordion.js' );
-        editor.widgets.add( 'widgetbootstrapAccordion', {
-
-            button: showButtons ? 'Add accordion box' : undefined,
-
-            template:
-                '<dl class="accordion" data-accordion><div class="col-1"></div></dl>',
-     
-
-            allowedContent: allowedFull,
-
-            dialog: 'widgetbootstrapAccordion',
-
-            upcast: function( element ) {
-                return element.name == 'div' && element.hasClass( 'accordion' );
-            },
-
-            /*init: function() {
-                var width = this.element.getStyle( 'width' );
-                if ( width )
-                    this.setData( 'width', width );
-                if ( this.element.hasClass( 'align-left' ) )
-                    this.setData( 'align', 'left' );
-                if ( this.element.hasClass( 'align-right' ) )
-                    this.setData( 'align', 'right' );
-                if ( this.element.hasClass( 'align-center' ) )
-                    this.setData( 'align', 'center' );
-            },
-
-            data: function() {
-
- 
-                var name = this.data.name != undefined ? this.data.name : 'accordion';
-                var count = this.data.count != undefined ? this.data.count : 0;
-                //@todo: var prevCount = this.data.prevCount != undefined ? this.data.prevCount : 
-
-                // Add rows
-                if (this.data.prevCount == undefined || this.data.prevCount < count) {
-                    for (var i=this.data.prevCount != undefined ? this.data.prevCount : 1; i<=count; i++) {
-                        var active = this.data.activePanel == i ? ' active' : '';
-                        var template = 
-                            '<dd class="accordion-navigation">' +
-                                '<a href="#'+ name+i +'"><div class="accordion-header-'+i+'">Heading '+i+'</div></a>' +
-                                '<div id="panel'+ name+i +'" class="content content-'+i+active+'">' +
-                                  '' +
-                                '</div>'
-                            '</dd>'
-                        var newPanel = CKEDITOR.dom.element.createFromHtml( template );
-                        this.element.append(newPanel);
-                    }
-
-                    // For some reason, the initEditable call needs to come in a separate for loop
-                    // the html code added wasn't in the DOM yet
-                    for (var i=this.data.prevCount != undefined ? this.data.prevCount : 1; i<=count; i++) {
-                        this.initEditable( 'heading'+i, {
-                            selector: '.accordion-header-'+i
-                        } );
-                        this.initEditable( 'content'+i, {
-                            selector: '.content-'+i
-                        } ); 
-                    }
-                }
-
-                // Remove rows
-                if (this.data.prevCount != undefined && this.data.prevCount > count) {
-                    // @todo
-                }
-                
-
-                this.data.prevCount = i;
-            }
-        } );*/
 
         // Append the widget's styles when in the CKEditor edit page,
         // added for better user experience.
