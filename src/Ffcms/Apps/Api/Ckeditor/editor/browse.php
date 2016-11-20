@@ -49,7 +49,7 @@ use Ffcms\Apps\Api\Ckeditor\Editor;
     <?php if ($files !== null && count($files) > 0): ?>
         <?php foreach ($files as $file): ?>
             <div class="col-md-2 well" style="margin-left: 5px;">
-                <div class="text-center"><strong><?= basename($file) ?></strong></div>
+                <div class="text-center"><strong><?= Str::lastIn($file, '/', true) ?></strong></div>
                 <?php if ($type === 'images'): ?>
                 <img src="<?= \App::$Alias->scriptUrl . '/' . $file ?>" class="img-responsive image-item" />
                 <?php elseif ($type === 'flash'): ?>
