@@ -50,4 +50,6 @@ CKEDITOR.editorConfig = function( config ) {
     config.startupFocus = false;
     config.basicEntities = false;
     config.startupOutlineBlocks = true;
+
+    config.protectedSource.push(/<i[^>]*><\/i>/g);
 };
