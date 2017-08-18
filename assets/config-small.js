@@ -24,7 +24,8 @@ CKEDITOR.editorConfig = function( config ) {
     // are not needed in a basic editor. They are removed here.
     config.removeButtons = 'Cut,Copy,Paste,Undo,Redo,Anchor,Underline,Strike,Subscript,Superscript,Indent,Outdent';
 
-    config.plugins = 'basicstyles,list,indentlist,enterkey,entities,link,toolbar,wysiwygarea,blockquote,sourcearea,codesnippet,smiley';
+    // add "image" to enable inserting images
+    config.plugins = 'autolink,imgur,basicstyles,list,indentlist,enterkey,entities,link,toolbar,wysiwygarea,blockquote,sourcearea,codesnippet,smiley';
     // Make dialogs simpler.
     config.removeDialogTabs = 'image:advanced;link:advanced';
 
@@ -45,4 +46,6 @@ CKEDITOR.editorConfig = function( config ) {
     config.startupOutlineBlocks = true;
 
     config.protectedSource.push(/<i[^>]*><\/i>/g);
+
+    config.imgurClientId = '823ecf8940c1ea8';
 };
