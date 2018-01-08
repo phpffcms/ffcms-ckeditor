@@ -4,6 +4,7 @@ namespace Ffcms\Widgets\Ckeditor;
 
 use Ffcms\Core\App;
 use Ffcms\Core\Arch\Widget as AbstractWidget;
+use Ffcms\Core\Helper\Type\Any;
 use Ffcms\Core\Helper\Type\Arr;
 use Ffcms\Core\Helper\Type\Obj;
 
@@ -49,7 +50,7 @@ class Ckeditor extends AbstractWidget
         App::$Alias->setCustomLibrary('js', $this->baseUrl . '/adapters/jquery.js');
         $jsInitializeCode = "$('.{$this->targetClass}').ckeditor({";
         $jsInitializeCode .= "language: '{$this->language}', customConfig: '{$this->config}.js', ";
-        if ($this->jsConfig !== null && Obj::isArray($this->jsConfig)) {
+        if ($this->jsConfig !== null && Any::isArray($this->jsConfig)) {
             foreach ($this->jsConfig as $obj => $value) {
                 $jsInitializeCode .= $obj . ": '" . $value . "', ";
             }

@@ -5,6 +5,7 @@ namespace Ffcms\Apps\Api\Ckeditor;
 use Extend\Core\Arch\ApiController;
 use Ffcms\Core\App;
 use Ffcms\Core\Exception\NativeException;
+use Ffcms\Core\Helper\Type\Any;
 use Ffcms\Core\Helper\Type\Arr;
 use Ffcms\Core\Helper\Date;
 use Ffcms\Core\Helper\FileSystem\File;
@@ -32,9 +33,9 @@ class Editor extends ApiController
     {
         parent::before();
         // check if user have permission to access there
-        if (!App::$User->isAuth() || !App::$User->identity()->getRole()->can('global/file')) {
+        if (!App::$User->isAuth() || !App::$User->identity()->role->can('global/file'))
             throw new NativeException('Permission denied');
-        }
+
         App::$Translate->append(__DIR__ . '/Translation/' . App::$Request->getLanguage() . '.php');
     }
 
@@ -43,13 +44,14 @@ class Editor extends ApiController
      * @param string $type
      * @throws NativeException
      * @throws \Ffcms\Core\Exception\SyntaxException
+     * @return string
      */
     public function actionBrowse($type)
     {
         $files = null;
         $relative = null;
         // check if request type is defined
-        if ($this->allowedExt[$type] === null || !Obj::isArray($this->allowedExt[$type])) {
+        if ($this->allowedExt[$type] === null || !Any::isArray($this->allowedExt[$type])) {
             throw new NativeException('Hack attempt');
         }
         // list files in directory
@@ -62,14 +64,12 @@ class Editor extends ApiController
         }
 
         // generate response
-        return App::$View->render('editor/browse',
-            [
-                'callbackName' => App::$Security->strip_tags(App::$Request->query->get('CKEditor')),
-                'callbackId' => (int)App::$Request->query->get('CKEditorFuncNum'),
-                'files' => $relative,
-                'type' => $type
-            ],
-            __DIR__);
+        return App::$View->render('editor/browse', [
+            'callbackName' => App::$Security->strip_tags(App::$Request->query->get('CKEditor')),
+            'callbackId' => (int)App::$Request->query->get('CKEditorFuncNum'),
+            'files' => $relative,
+            'type' => $type
+        ], __DIR__);
     }
 
     /**
@@ -83,16 +83,14 @@ class Editor extends ApiController
     {
         /** @var $loadFile \Symfony\Component\HttpFoundation\File\UploadedFile */
         $loadFile = App::$Request->files->get('upload');
-        if ($loadFile === null || $loadFile->getError() !== 0) {
+        if ($loadFile === null || $loadFile->getError() !== 0)
             return $this->errorResponse(__('File upload failed'));
-        }
 
         // get file extension
         $fileExt = '.' . $loadFile->guessExtension();
         // check if this request type is allowed
-        if ($this->allowedExt[$type] === null || !Obj::isArray($this->allowedExt[$type])) {
+        if ($this->allowedExt[$type] === null || !Any::isArray($this->allowedExt[$type]))
             throw new NativeException('Hack attempt');
-        }
 
         // check if this file extension is allowed to upload
         if (!Arr::in($fileExt, $this->allowedExt[$type])) {
@@ -123,19 +121,16 @@ class Editor extends ApiController
      * @param string|null $message
      * @return string
      * @throws \Ffcms\Core\Exception\SyntaxException
-     * @throws \Ffcms\Core\Exception\NativeException
+     * @return string
      */
     private function errorResponse($message = null)
     {
-        if ($message === null) {
+        if ($message === null)
             $message = 'Unknown error';
-        }
 
-        return App::$View->render('editor/load_error',
-            [
-                'callbackId' => (int)App::$Request->query->get('CKEditorFuncNum'),
-                'message' => $message
-            ],
-            __DIR__);
+        return App::$View->render('editor/load_error', [
+            'callbackId' => (int)App::$Request->query->get('CKEditorFuncNum'),
+            'message' => $message
+        ],__DIR__);
     }
 }
